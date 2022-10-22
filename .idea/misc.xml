@@ -3,6 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/khaf/AndroidStudioProjects/Charly_App/app/src/main/res/drawable/circle.xml" value="0.4915" />
+        <entry key="..\:/Users/khaf/AndroidStudioProjects/Charly_App/app/src/main/res/layout/activity_inicio.xml" value="0.5197916666666667" />
+        <entry key="..\:/Users/khaf/AndroidStudioProjects/Charly_App/app/src/main/res/layout/activity_registro_tipos.xml" value="0.536" />
+        <entry key="..\:/Users/khaf/AndroidStudioProjects/Charly_App/app/src/main/res/layout/fragment_dynamic.xml" value="0.5197916666666667" />
+        <entry key="..\:/Users/khaf/AndroidStudioProjects/Charly_App/app/src/main/res/layout/list_template.xml" value="0.18958333333333333" />
+        <entry key="..\:/Users/khaf/AndroidStudioProjects/Charly_App/app/src/main/res/layout/view_categorias.xml" value="0.72" />
         <entry key="..\:/Users/tecod/AndroidStudioProjects/Charly_App/app/src/main/res/layout/activity_inicio.xml" value="0.16" />
         <entry key="..\:/Users/tecod/AndroidStudioProjects/Charly_App/app/src/main/res/layout/activity_main.xml" value="0.14180929095354522" />
         <entry key="..\:/Users/tecod/AndroidStudioProjects/Charly_App/app/src/main/res/layout/activity_registro.xml" value="0.12" />

@@ -11,16 +11,43 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabs"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/app_name"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@android:color/white"
-            app:tabIndicatorHeight="4dp"
-            app:tabMode="scrollable"
-            app:tabTextColor="@color/black" />
+            android:background="#FFFFFF">
+
+            <ImageButton
+                android:id="@+id/imgbtnConfiguracion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:contentDescription="@string/app_name"
+                app:srcCompat="@android:drawable/ic_menu_sort_by_size" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/app_name"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@android:color/white"
+                app:tabIndicatorHeight="4dp"
+                app:tabMode="scrollable"
+                app:tabTextColor="@color/black" />
+
+            <Button
+                android:id="@+id/imgbtnRegistros"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="right"
+                android:background="@drawable/circle"
+                android:foreground="@android:drawable/ic_menu_preferences"
+                android:foregroundGravity="center"
+                android:paddingTop="0dp"
+                android:textColor="#fff" />
+
+        </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 

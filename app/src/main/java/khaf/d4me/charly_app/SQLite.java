@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.provider.BaseColumns;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public class SQLite extends SQLiteOpenHelper {
     private static final String USERS_TABLE_CREATE = "CREATE TABLE Usuarios (Id_Usuario INTEGER PRIMARY KEY AUTOINCREMENT, Usuario TEXT, Contrasena TEXT, Tipo INTEGER, Estatus INTEGER);";
     private static final String USERSPERS_TABLE_CREATE = "CREATE TABLE Usuarios_Datos (Id_Usuario_Personales INTEGER PRIMARY KEY AUTOINCREMENT, Id_Usuario INTEGER, Nombre TEXT, " +
             "Apellido_P TEXT, Apellido_M TEXT, Telefono TEXT, Correo TEXT);";
-    private static final String CATEGORIAS_TABLE_CREATE = "CREATE TABLE Categorias (Id_Usuario INTEGER PRIMARY KEY AUTOINCREMENT, Usuario TEXT, Contrasena TEXT, Tipo INTEGER, Estatus INTEGER);";
+    private static final String CATEGORIAS_TABLE_CREATE = "CREATE TABLE Categorias (_id INTEGER PRIMARY KEY AUTOINCREMENT, Categoria TEXT, Estatus INTEGER);";
     private static final String DB_NAME = "Charly.sql";
     private static final int DB_VERSION = 1;
     private final SQLiteDatabase db;
@@ -25,6 +26,12 @@ public class SQLite extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(USERS_TABLE_CREATE);
         sqLiteDatabase.execSQL(USERSPERS_TABLE_CREATE);
+        sqLiteDatabase.execSQL(CATEGORIAS_TABLE_CREATE);
+
+    }
+    public static class CatColumns {
+        public static final String ID_GENRE = BaseColumns._ID;
+        public static final String Cate = "Categoria";
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -50,6 +57,12 @@ public class SQLite extends SQLiteOpenHelper {
         cv.put("Correo", correo);
         db.insert("Usuarios_Datos", null, cv);
     }
+    public void Guardar_Categorias(String Categoria, int Estatus){
+        ContentValues cv = new ContentValues();
+        cv.put("Categoria", Categoria);
+        cv.put("Estatus", Estatus);
+        db.insert("Categorias", null, cv);
+    }
 
     //Borrar a partir de su id
     public void borrarUsuario(int id){
@@ -60,6 +73,10 @@ public class SQLite extends SQLiteOpenHelper {
     public void borrarDatosUsuario(int id){
         String[] args = new String[]{String.valueOf(id)};
         db.delete("Usuarios_Datos", "Id_Usuario=?", args);
+    }
+    public void borrarDatosCategorias(int id){
+        String[] args = new String[]{String.valueOf(id)};
+        db.delete("Categorias", "_id=?", args);
     }
 
     //Obtener la lista de comentarios en la base de datos
@@ -110,6 +127,27 @@ public class SQLite extends SQLiteOpenHelper {
         c.close();
         return lista;
     }
+    public ArrayList<Categorias> getCategorias(){
+        //Creamos el cursor
+        ArrayList<Categorias>lista=new ArrayList<Categorias>();
+        Cursor c = db.rawQuery("select _id, Categoria, Estatus from Categorias", null);
+        if (c != null && c.getCount()>0) {
+            c.moveToFirst();
+            do {
+                //Asignamos el valor en nuestras variables para crear un nuevo objeto Comentario
+                String Categoria = c.getString(1);
+                int Estatus = c.getInt(2);
+                int id=c.getInt(0);
+                Categorias us = new Categorias(id, Categoria, Estatus);
+                //Añadimos el comentario a la lista
+                lista.add(us);
+            } while (c.moveToNext());
+        }
+
+        //Cerramos el cursor
+        c.close();
+        return lista;
+    }
     public boolean login(String usu, String contra) {
         SQLiteDatabase db = this.getWritableDatabase(); //get the database that was created in this instance
         Cursor c = db.rawQuery("select * from Usuarios where Usuario =? And Contrasena = ?", new String[]{usu, contra});
@@ -119,6 +157,11 @@ public class SQLite extends SQLiteOpenHelper {
         }else {
             return false;
         }
+    }
+    public Cursor getAllCategories(){
+        SQLiteDatabase db = this.getWritableDatabase(); //get the database that was created in this instance
+        //Seleccionamos todas las filas de la tabla Genres
+        return db.rawQuery("select * from Categorias", null);
     }
 
     public int Obtener_Usuario_Id(){

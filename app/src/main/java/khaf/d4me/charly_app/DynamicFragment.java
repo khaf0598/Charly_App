@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class DynamicFragment extends Fragment {
     public static DynamicFragment newInstance() {
@@ -31,8 +32,8 @@ public class DynamicFragment extends Fragment {
 
     // initialise the categories
     private void initViews(View view) {
-        TextView textView = view.findViewById(R.id.commonTextView);
-        textView.setText(String.valueOf("Category :  " + getArguments().getInt("position")));
+        RecyclerView rv = view.findViewById(R.id.rvDatos);
+        //textView.setText(String.valueOf("Category :  " + getArguments().getInt("position")));
     }
 
     @Override
